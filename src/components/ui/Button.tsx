@@ -1,28 +1,76 @@
-export interface ButtonProps {
-    variant?: "primary" | "secondary";
-    size?: "sm" | "md" | "lg";
-    text?: string;
-    startIcon?: any;
-    endIcon?: any;
+// export interface ButtonProps {
+//   variant?: "primary" | "secondary";
+//   size?: "sm" | "md" | "lg";
+//   text?: string;
+//   startIcon?: any;
+//   endIcon?: any;
+//   onClick?: () => void;
+// }
+
+// const variantStyles = {
+//   primary: "bg-purple-600 text-white",
+//   secondary: "bg-purple-200 text-purple-600",
+// };
+// const sizeStyles = {
+//   sm: "py-1 px-2",
+//   md: "py-2 px-4",
+//   lg: "py-4 px-6",
+// };
+// const defaultStyles = "rounded-md flex item-center justify-center font-light";
+
+// export const Button = ({
+//   variant = "primary",
+//   text,
+//   size = "sm",
+//   startIcon,
+//   endIcon,
+// }: ButtonProps) => {
+//   return (
+//     <button
+//       className={`${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]}`}
+//     >
+//       {startIcon ? <div className="pr-2">{startIcon}</div> : null}
+//       {text}
+//       {endIcon ? <div className="pl-2">{endIcon}</div> : null}
+//     </button>
+//   );
+// };
+
+// <Button variant="primary" size="lg" text="Click Me" onClick={() => {}} />;
+
+// Importing ReactElement type for typing React elements like icons
+import { ReactElement } from "react";
+
+// Defining the properties that the Button component can accept
+interface ButtonProps {
+    variant: "primary" | "secondary"; 
+    text: string; 
+    startIcon?: ReactElement; 
     onClick?: () => void;
-
+    fullWidth?: boolean; 
+    loading?: boolean; 
 }
 
-const variantStyles = {
-    "primary" : "bg-indigo-600 text-white",
-    "secondary" : "bg-indigo-200 text-indigo-600"
-}
-const sizeStyles = {
-    "sm" : "py-1 px-2",
-    "md" : "py-2 px-4",
-    "lg" : "py-4 px-6",
-    
-    
-}
-const defaultStyles = "rounded-md flex";    
+// Mapping button variants to their respective CSS classes
+const variantClasses = {
+    "primary": "bg-purple-600 text-white", // Styles for primary variant
+    "secondary": "bg-purple-200 text-purple-600", // Styles for secondary variant
+};
 
-export const Button = ({variant = "primary", text, size = "sm", startIcon, endIcon}: ButtonProps) => {
-    return <button className={`${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]}`}>{startIcon ? <div className="pr-2">{startIcon}</div> : null}{text}{endIcon}</button>
-}
+// Default CSS classes for all buttons
+const defaultStyles = "px-4 py-2 rounded-md font-light flex items-center";      //items-center is for vertically allignment of the item to be center
 
-<Button variant="primary" size="lg" text="Click Me" onClick={() => {}} />
+// The Button functional component
+export function Button({ variant, text, startIcon, onClick, fullWidth, loading }: ButtonProps) {
+    return (
+        // A button element with dynamic class names and properties
+        <button onClick={onClick} className={variantClasses[variant] + " " + defaultStyles + `${fullWidth ? " w-full flex justify-center items-center" : ""} ${loading ? "opacity-45" : ""}` } disabled={loading} >
+            {/* Container for optional start icon */}
+            <div className="pr-2">
+                {startIcon}
+            </div>
+            {/* Button text */}
+            {text}
+        </button>
+    );
+}
