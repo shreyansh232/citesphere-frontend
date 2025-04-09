@@ -3,6 +3,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },
       colors: {
         gray: {
           100: "#eeeeef",
@@ -12,8 +15,8 @@ export default {
         purple: {
           200: "#d9ddee",
           300: "#e0e7fe",
-          500: "#9492db",
-          600: "#7164c0",
+          500: "#3e38a7",
+          600: "#5046e4"
         },
       },
     },
