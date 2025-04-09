@@ -39,8 +39,8 @@ export const CreateContentModal = ({ isOpen, onClose }: {isOpen: boolean, onClos
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center gap-2">
-                <Input placeholder="Title" onChange={}/>
-                <Input placeholder="Link" onChange={}/>
+                <Input placeholder="Title" onChange={() => console.log("Clicked") }/>
+                <Input placeholder="Link" onChange={() => console.log("Clicked") }/>
               </div>
               <div className="flex justify-center mt-2">
                 <Button text="Submit" size="md" variant="primary" />
