@@ -1,12 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreateContentModal } from "../components/CreateContentModal";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
 import { PlusIcon } from "../icons/PlusIcon";
 import { ShareIcon } from "../icons/ShareIcon";
 import { Sidebar } from "../components/ui/Sidebar";
+import { useContent } from "../hooks/useContent"; // Custom hook to fetch content
 function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
+  const { contents, refresh } = useContent();
+
+  // useEffect hook to refresh the content whenever the modalOpen state changes
+  useEffect(() => {
+    refresh();
+  }, [modalOpen]);
 
   return (
     <div>
@@ -35,7 +42,14 @@ function Dashboard() {
           </div>
         </div>
         <div className="gap-4 flex mt-5">
-          <Card
+          {contents.map((content) => (
+            <Card
+              title={content?.title}
+              link={content?.link}
+              type={content?.type}
+            />
+          ))}
+          {/* <Card
             title="Tweet"
             link="https://x.com/kirat_tw/status/1910018864534151497"
             type="twitter"
@@ -44,7 +58,7 @@ function Dashboard() {
             title="Youtube"
             link="https://www.youtube.com/embed/wjZofJX0v4M?si=fFJKn_VWBC_ywoEn"
             type="youtube"
-          />
+          /> */}
         </div>
       </div>
     </div>

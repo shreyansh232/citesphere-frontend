@@ -21,7 +21,7 @@ const sizeStyles = {
   lg: "py-4 px-6",
 };
 const defaultStyles =
-  "rounded-md flex items-center justify-center font-light px-4 py-2 transition-all duration-200";
+  "rounded-md flex items-center justify-center font-light px-4 py-2 transition-all duration-200 cursor-pointer";
 
 export const Button = ({
   variant = "primary",
