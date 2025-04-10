@@ -55,7 +55,7 @@ export const CreateContentModal = ({ isOpen, onClose }: {isOpen: boolean, onClos
   );
 };
 
-function Input({
+export function Input({
   onChange,
   placeholder,
 }: {
