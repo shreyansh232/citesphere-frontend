@@ -6,6 +6,7 @@ export interface ButtonProps {
   endIcon?: any;
   onClick?: () => void;
   className?: string; 
+  type?: "submit" | "reset" | "button";
 }
 
 const variantStyles = {
@@ -27,11 +28,13 @@ export const Button = ({
   endIcon,
   onClick,
   className = "", 
+  type,
 }: ButtonProps) => {
   return (
     <button
       className={`${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]} ${className}`}
       onClick={onClick}
+      type={type}
     >
       {startIcon ? <div className="pr-2">{startIcon}</div> : null}
       {text}

@@ -3,7 +3,13 @@ import { CrossIcon } from "../icons/CrossIcon";
 import { Button } from "./ui/Button";
 
 //controlled component
-export const CreateContentModal = ({ isOpen, onClose }: {isOpen: boolean, onClose: () => void}) => {
+export const CreateContentModal = ({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,8 +45,16 @@ export const CreateContentModal = ({ isOpen, onClose }: {isOpen: boolean, onClos
                 </div>
               </div>
               <div className="flex flex-col justify-center items-center gap-2">
-                <Input placeholder="Title" onChange={() => console.log("Clicked") }/>
-                <Input placeholder="Link" onChange={() => console.log("Clicked") }/>
+                <Input
+                  type="text"
+                  placeholder="Title"
+                  onChange={() => console.log("Clicked")}
+                />
+                <Input
+                  type="text"
+                  placeholder="Link"
+                  onChange={() => console.log("Clicked")}
+                />
               </div>
               <div className="flex justify-center mt-2">
                 <Button text="Submit" size="md" variant="primary" />
@@ -58,17 +72,24 @@ export const CreateContentModal = ({ isOpen, onClose }: {isOpen: boolean, onClos
 export function Input({
   onChange,
   placeholder,
+  className,
+  id,
+  type,
 }: {
-  onChange: () => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
+  className?: string;
+  id?: string;
+  type?: string;
 }) {
   return (
     <div>
       <input
-        type="text"
+        type={type}
         placeholder={placeholder}
-        className="px-4 py-2 border border-gray-300 rounded-md"
+        className={`px-4 py-2 border border-gray-300 rounded-md ${className}`}
         onChange={onChange}
+        id={id}
       ></input>
     </div>
   );
