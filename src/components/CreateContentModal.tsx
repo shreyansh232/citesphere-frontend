@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { CrossIcon } from "../icons/CrossIcon";
 import { Button } from "./ui/Button";
+import { Input } from "./ui/Input";
 
 //controlled component
 export const CreateContentModal = ({
@@ -69,30 +70,3 @@ export const CreateContentModal = ({
   );
 };
 
-export function Input({
-  onChange,
-  placeholder,
-  className,
-  id,
-  type,
-  fullWidth,
-}: {
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  placeholder: string;
-  className?: string;
-  id?: string;
-  type?: string;
-  fullWidth?: boolean;
-}) {
-  return (
-    <div>
-      <input
-        type={type}
-        placeholder={placeholder}
-        className={`px-4 py-2 border border-gray-300 rounded-md ${className} ${fullWidth ? " w-full flex justify-center items-center" : ""}`}
-        onChange={onChange}
-        id={id}
-      ></input>
-    </div>
-  );
-}

@@ -7,6 +7,7 @@ import { ShareIcon } from "../icons/ShareIcon";
 import { Sidebar } from "../components/ui/Sidebar";
 function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <div>
       <Sidebar />

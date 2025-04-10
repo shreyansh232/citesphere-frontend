@@ -1,31 +1,26 @@
-import { useState } from "react";
-import { Input } from "../components/CreateContentModal";
+import { useRef } from "react";
 import { Button } from "../components/ui/Button";
 import { Logo } from "../icons/Logo";
 import { useNavigate } from "react-router-dom";
+import { Input } from "../components/ui/Input";
+import { BACKEND_URL } from "../config";
+import axios from "axios";
 
 export const Signup = () => {
-  const [username, setUsername] = useState(""); 
-  const [password, setPassword] = useState(""); 
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault(); 
-    console.log("Form submitted"); 
-    const response = await fetch("http://localhost:8001/api/v1/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
+    event.preventDefault();
+    console.log("Form submitted");
+    const username = usernameRef.current?.value;
+    const password = passwordRef.current?.value;
+
+    await axios.post(`${BACKEND_URL}/api/v1/signup`, {
+      username,
+      password,
     });
-    //@ts-ignore
-    if (!response.ok) {
-        const errorData = await response.json(); 
-        throw new Error(errorData.message || "There was an error during signup");
-    }
-    const data = await response.json();
-    console.log("Success", data);
-    navigate("/signin")
+    navigate("/signin");
   };
 
   return (
@@ -52,7 +47,7 @@ export const Signup = () => {
             <Input
               id="username"
               placeholder="Username"
-              onChange={(e) => setUsername(e.target.value)}
+              reference={usernameRef}
               fullWidth={true}
             />
           </div>
@@ -64,7 +59,7 @@ export const Signup = () => {
               id="password" // Add id for accessibility
               type="password" // Set type to password
               placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
+              reference={passwordRef}
               fullWidth={true}
             />
           </div>
