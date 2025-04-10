@@ -5,8 +5,10 @@ export interface ButtonProps {
   startIcon?: any;
   endIcon?: any;
   onClick?: () => void;
-  className?: string; 
+  className?: string;
   type?: "submit" | "reset" | "button";
+  fullWidth?: boolean;
+  loading?: boolean;
 }
 
 const variantStyles = {
@@ -18,7 +20,8 @@ const sizeStyles = {
   md: "py-2 px-4",
   lg: "py-4 px-6",
 };
-const defaultStyles = "rounded-md flex items-center justify-center font-light px-4 py-2 transition-all duration-200";
+const defaultStyles =
+  "rounded-md flex items-center justify-center font-light px-4 py-2 transition-all duration-200";
 
 export const Button = ({
   variant = "primary",
@@ -27,12 +30,14 @@ export const Button = ({
   startIcon,
   endIcon,
   onClick,
-  className = "", 
+  className = "",
   type,
+  fullWidth,
+  loading,
 }: ButtonProps) => {
   return (
     <button
-      className={`${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]} ${className}`}
+      className={`${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]} ${className} ${fullWidth ? " w-full flex justify-center items-center" : ""} ${loading ? "opacity-45" : ""}`}
       onClick={onClick}
       type={type}
     >
@@ -42,5 +47,3 @@ export const Button = ({
     </button>
   );
 };
-
-{/* <Button variant="primary" size="lg" text="Click Me" onClick={() => {}} />; */}

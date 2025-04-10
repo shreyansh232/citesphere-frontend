@@ -45,7 +45,7 @@ export const Signup = () => {
         </div>
 
         <div className="flex flex-col gap-3 items-center w-full">
-          <div>
+          <div className="w-full">
             <label htmlFor="username" className="text-lg">
               Enter your username
             </label>
@@ -53,10 +53,10 @@ export const Signup = () => {
               id="username"
               placeholder="Username"
               onChange={(e) => setUsername(e.target.value)}
-              className="min-w-80"
+              fullWidth={true}
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-2 w-full">
             <label htmlFor="password" className="text-lg">
               Enter your password
             </label>
@@ -65,10 +65,10 @@ export const Signup = () => {
               type="password" // Set type to password
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
-              className="min-w-80"
+              fullWidth={true}
             />
           </div>
-          <Button text="Submit" className="min-w-80" type="submit" />
+          <Button text="Submit" fullWidth={true} type="submit" />
         </div>
       </form>
     </div>
