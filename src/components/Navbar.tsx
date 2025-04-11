@@ -21,7 +21,7 @@ function Navbar() {
               size="lg"
               variant="primary"
               text="Login"
-              className="text-black rounded-full px-8"
+              className="text-black !rounded-full px-8"
             />
           </a>
         </div>

@@ -12,7 +12,7 @@ export interface ButtonProps {
 }
 
 const variantStyles = {
-  primary: "bg-yellow-400 text-white hover:bg-yellow-700",
+  primary: "bg-yellow-400 hover:bg-yellow-700 text-black",
   secondary: "bg-yellow-200 text-yellow-600 hover:bg-yellow-300",
 };
 const sizeStyles = {
