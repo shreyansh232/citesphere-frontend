@@ -12,13 +12,13 @@ export interface ButtonProps {
 }
 
 const variantStyles = {
-  primary: "bg-purple-600 text-white hover:bg-indigo-700",
-  secondary: "bg-purple-200 text-purple-600 hover:bg-purple-300",
+  primary: "bg-yellow-400 text-white hover:bg-yellow-700",
+  secondary: "bg-yellow-200 text-yellow-600 hover:bg-yellow-300",
 };
 const sizeStyles = {
   sm: "py-1 px-2",
   md: "py-2 px-4",
-  lg: "py-4 px-6",
+  lg: "py-2 px-6",
 };
 const defaultStyles =
   "rounded-md flex items-center justify-center font-light px-4 py-2 transition-all duration-200 cursor-pointer";

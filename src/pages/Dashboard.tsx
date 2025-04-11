@@ -6,6 +6,8 @@ import { PlusIcon } from "../icons/PlusIcon";
 import { ShareIcon } from "../icons/ShareIcon";
 import { Sidebar } from "../components/ui/Sidebar";
 import { useContent } from "../hooks/useContent"; // Custom hook to fetch content
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
   const { contents, refresh } = useContent();
@@ -28,11 +30,19 @@ function Dashboard() {
         <div className="flex justify-between gap-4">
           <h1 className="text-3xl font-semibold">All Notes</h1>
           <div className="flex gap-4">
-            <Button
-              variant="secondary"
-              text="Share"
-              startIcon={<ShareIcon size="lg" />}
-            ></Button>
+          <Button onClick={async () => {
+              // Making a POST request to share the brain content
+              const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`, {
+                  share: true
+              }, {
+                  headers: {
+                      "Authorization": localStorage.getItem("token") // Passing the authorization token in the request header
+                  }
+              });
+              // Constructing the share URL and alerting the user with the link
+              const shareUrl = `http://localhost:5173/share/${response.data.hash}`;
+              alert(shareUrl);
+          }} variant="secondary" text="Share brain" startIcon={<ShareIcon size="lg"/>} />
             <Button
               startIcon={<PlusIcon size="lg" />}
               variant="primary"
@@ -42,11 +52,11 @@ function Dashboard() {
           </div>
         </div>
         <div className="gap-4 flex mt-5">
-          {contents.map((content) => (
+          {contents.map(({title, link, type}) => (
             <Card
-              title={content?.title}
-              link={content?.link}
-              type={content?.type}
+              title={title}
+              link={link}
+              type={type}
             />
           ))}
           {/* <Card
