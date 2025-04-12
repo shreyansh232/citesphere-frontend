@@ -9,11 +9,12 @@ export interface ButtonProps {
   type?: "submit" | "reset" | "button";
   fullWidth?: boolean;
   loading?: boolean;
+  disabled?: boolean;
 }
 
 const variantStyles = {
   primary: "bg-yellow-400 hover:bg-yellow-700 text-black",
-  secondary: "bg-yellow-200 text-yellow-600 hover:bg-yellow-300",
+  secondary: "bg-gray-900 text-yellow-400 hover:bg-yellow-300 hover:text-black rounded-full border border-yellow-400",
 };
 const sizeStyles = {
   sm: "py-1 px-2",
@@ -34,12 +35,14 @@ export const Button = ({
   type,
   fullWidth,
   loading,
+  disabled,
 }: ButtonProps) => {
   return (
     <button
-      className={`${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]} ${className} ${fullWidth ? " w-full flex justify-center items-center" : ""} ${loading ? "opacity-45" : ""}`}
+      className={`${variantStyles[variant]} ${defaultStyles} ${sizeStyles[size]} ${className} ${fullWidth ? " w-full flex justify-center items-center" : ""} ${loading ? "opacity-45" : ""} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
       onClick={onClick}
       type={type}
+      disabled={disabled}
     >
       {startIcon ? <div className="pr-2">{startIcon}</div> : null}
       {text}

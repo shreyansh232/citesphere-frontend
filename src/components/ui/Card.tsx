@@ -1,5 +1,7 @@
 import { ShareIcon } from "../../icons/ShareIcon";
 import { TrashIcon } from "../../icons/TrashIcon";
+import { TwitterIcon } from "../../icons/TwitterIcon";
+import { YoutubeIcon } from "../../icons/YoutubeIcon";
 
 interface CardProps {
   title?: string;
@@ -10,17 +12,17 @@ interface CardProps {
 export const Card = ({ title, link, type }: CardProps) => {
   return (
     <div>
-      <div className="bg-white rounded-xl shadow-lg border border-gray-200 max-w-72 p-4 min-h-96 min-w-72">
+      <div className="backdrop-blur-md bg-white/10 rounded-xl border border-white/20 shadow-lg p-4 min-h-[350px] max-h-[350px] min-w-[350px] transition-all duration-300 hover:bg-white/20 hover:shadow-xl">
         <div className="flex justify-between">
-          <div className="flex items-center gap-2">
-            <ShareIcon size="md" />
+          <div className="flex items-center gap-2 text-white/90 font-medium">
+            {type === "twitter" ? <TwitterIcon size="md" /> : type === "youtube" ? <YoutubeIcon size="md" /> : <ShareIcon size="md" />}
             {title}
           </div>
-          <div className="flex items-center gap-4 text-gray-400">
-            <a href={link} target="_blank">
+          <div className="flex items-center gap-4 text-white/70">
+            <a href={link} target="_blank" className="hover:text-white/90 transition-colors">
               <ShareIcon size="md" />
             </a>
-            <button>
+            <button className="hover:text-white/90 transition-colors">
               <TrashIcon size="md" />
             </button>
           </div>
@@ -28,15 +30,17 @@ export const Card = ({ title, link, type }: CardProps) => {
         <div className="pt-4">
           {/* Render YouTube embed if type is "youtube" */}
           {type === "youtube" && (
-            <iframe
-              className="w-full"
-              src={link?.replace("watch", "embed").replace("?v=", "/")}
-              title="YouTube video player"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+            <div className="rounded-lg overflow-hidden">
+              <iframe
+                className="w-full"
+                src={link?.replace("watch", "embed").replace("?v=", "/")}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              ></iframe>
+            </div>
           )}
 
           {/* Render Twitter embed if type is "twitter" */}

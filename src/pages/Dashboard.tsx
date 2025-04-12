@@ -8,8 +8,10 @@ import { Sidebar } from "../components/ui/Sidebar";
 import { useContent } from "../hooks/useContent"; // Custom hook to fetch content
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+
 function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const { contents, refresh } = useContent();
 
   // useEffect hook to refresh the content whenever the modalOpen state changes
@@ -19,30 +21,43 @@ function Dashboard() {
 
   return (
     <div>
-      <Sidebar />
-      <div className="p-4 ml-72 min-h-screen bg-gray-100 border-2">
+      <Sidebar onCollapsedChange={setSidebarCollapsed} />
+      <div
+        className={`p-4 min-h-screen bg-black transition-all duration-300 ${
+          sidebarCollapsed ? "ml-24" : "ml-72"
+        } bg-black bg-[radial-gradient(circle_closest-corner_at_100%,_rgba(250,204,21,0.2),_#0000),radial-gradient(circle_closest-corner_at_0%,_rgba(250,204,21,0.2),_#0000)]`}
+      >
         <CreateContentModal
           isOpen={modalOpen}
           onClose={() => {
             setModalOpen(false);
           }}
         />
-        <div className="flex justify-between gap-4">
-          <h1 className="text-3xl font-semibold">All Notes</h1>
+        <div className="flex justify-between gap-4 text-white">
+          <h1 className="text-4xl font-medium">All Bookmarks</h1>
           <div className="flex gap-4">
-          <Button onClick={async () => {
-              // Making a POST request to share the brain content
-              const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`, {
-                  share: true
-              }, {
-                  headers: {
-                      "Authorization": localStorage.getItem("token") // Passing the authorization token in the request header
+            <Button
+              onClick={async () => {
+                // Making a POST request to share the brain content
+                const response = await axios.post(
+                  `${BACKEND_URL}/api/v1/brain/share`,
+                  {
+                    share: true,
+                  },
+                  {
+                    headers: {
+                      Authorization: localStorage.getItem("token"), // Passing the authorization token in the request header
+                    },
                   }
-              });
-              // Constructing the share URL and alerting the user with the link
-              const shareUrl = `http://localhost:5173/share/${response.data.hash}`;
-              alert(shareUrl);
-          }} variant="secondary" text="Share brain" startIcon={<ShareIcon size="lg"/>} />
+                );
+                // Constructing the share URL and alerting the user with the link
+                const shareUrl = `http://localhost:5173/share/${response.data.hash}`;
+                alert(shareUrl);
+              }}
+              variant="secondary"
+              text="Share Vault"
+              startIcon={<ShareIcon size="lg" />}
+            />
             <Button
               startIcon={<PlusIcon size="lg" />}
               variant="primary"
@@ -51,24 +66,10 @@ function Dashboard() {
             ></Button>
           </div>
         </div>
-        <div className="gap-4 flex mt-5">
-          {contents.map(({title, link, type}) => (
-            <Card
-              title={title}
-              link={link}
-              type={type}
-            />
+        <div className="gap-5 flex mt-5 flex-wrap">
+          {contents.map(({ title, link, type }) => (
+            <Card title={title} link={link} type={type} />
           ))}
-          {/* <Card
-            title="Tweet"
-            link="https://x.com/kirat_tw/status/1910018864534151497"
-            type="twitter"
-          />
-          <Card
-            title="Youtube"
-            link="https://www.youtube.com/embed/wjZofJX0v4M?si=fFJKn_VWBC_ywoEn"
-            type="youtube"
-          /> */}
         </div>
       </div>
     </div>

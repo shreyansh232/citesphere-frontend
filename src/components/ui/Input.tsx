@@ -6,6 +6,7 @@ interface InputProps {
   id?: string;
   type?: string;
   fullWidth?: boolean;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
 }
 export function Input({
   onChange,
@@ -15,6 +16,7 @@ export function Input({
   id,
   type,
   fullWidth,
+  onBlur,
 }: InputProps) {
   return (
     <div>
@@ -22,9 +24,10 @@ export function Input({
         type={type}
         ref={reference}
         placeholder={placeholder}
-        className={`px-4 py-2 border border-gray-300 rounded-md ${className} ${fullWidth ? " w-full flex justify-center items-center" : ""}`}
+        className={`px-4 py-2 border border-gray-300 rounded-xl ${className} ${fullWidth ? " w-full flex justify-center items-center" : ""}`}
         onChange={onChange}
         id={id}
+        onBlur={onBlur}
       ></input>
     </div>
   );
