@@ -1,15 +1,61 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <link rel="icon" href="/logo.svg" /> 
+    <link rel="icon" href="/logo.svg" />
     <meta charset="UTF-8" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Citesphere</title>
+    <style>
+      /* Custom styles for Reddit embeds */
+      .reddit-embed-container {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        min-height: 200px;
+      }
+      /* Override Reddit embed styles to match your theme */
+      .reddit-embed {
+        background-color: transparent !important;
+        border: none !important;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> 
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <script>
+      // Define a global object to help with Reddit embed reloading
+      window.rembeddit = {
+        load: function() {
+          // Remove any existing script
+          const oldScript = document.getElementById('reddit-embed-script');
+          if (oldScript) {
+            oldScript.remove();
+          }
+          
+          // Create a new script element
+          const script = document.createElement('script');
+          script.id = 'reddit-embed-script';
+          script.src = 'https://embed.reddit.com/widgets.js';
+          script.charset = 'UTF-8';
+          script.async = true;
+          
+          // Append the script to the document
+          document.body.appendChild(script);
+        }
+      };
+      
+      // Initial load
+      window.rembeddit.load();
+    </script>
   </body>
 </html>

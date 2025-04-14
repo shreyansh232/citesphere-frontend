@@ -1,16 +1,17 @@
-import { useState } from "react"
-import { Logo } from "../../icons/Logo"
-import { TwitterIcon } from "../../icons/TwitterIcon"
-import { YoutubeIcon } from "../../icons/YoutubeIcon"
-import { SidebarItem } from "./SidebarItem"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useState } from "react";
+import { Logo } from "../../icons/Logo";
+import { TwitterIcon } from "../../icons/TwitterIcon";
+import { YoutubeIcon } from "../../icons/YoutubeIcon";
+import { SidebarItem } from "./SidebarItem";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { RedditIcon } from "../../icons/RedditIcon";
 
 interface SidebarProps {
   onCollapsedChange?: (collapsed: boolean) => void;
 }
 
 export const Sidebar = ({ onCollapsedChange }: SidebarProps) => {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(false);
 
   const toggleSidebar = () => {
     const newCollapsedState = !collapsed;
@@ -18,7 +19,7 @@ export const Sidebar = ({ onCollapsedChange }: SidebarProps) => {
     if (onCollapsedChange) {
       onCollapsedChange(newCollapsedState);
     }
-  }
+  };
 
   return (
     <div
@@ -27,7 +28,9 @@ export const Sidebar = ({ onCollapsedChange }: SidebarProps) => {
       }`}
     >
       <div className="flex justify-between items-center">
-        <div className={`flex pt-8 items-center gap-2 ${collapsed ? "ml-5" : "pl-6"}`}>
+        <div
+          className={`flex pt-8 items-center gap-2 ${collapsed ? "ml-5" : "pl-6"}`}
+        >
           <div className="text-purple-600">
             <Logo size="xl" />
           </div>
@@ -46,9 +49,22 @@ export const Sidebar = ({ onCollapsedChange }: SidebarProps) => {
         </button>
       </div>
       <div className={`pt-8 ${collapsed ? "px-2" : "pl-4"}`}>
-        <SidebarItem text="Twitter" icon={<TwitterIcon size="md" />} collapsed={collapsed} />
-        <SidebarItem text="Youtube" icon={<YoutubeIcon size="md" />} collapsed={collapsed} />
+        <SidebarItem
+          text="Twitter"
+          icon={<TwitterIcon size="md" />}
+          collapsed={collapsed}
+        />
+        <SidebarItem
+          text="Youtube"
+          icon={<YoutubeIcon size="md" />}
+          collapsed={collapsed}
+        />
+        <SidebarItem
+          text="Reddit"
+          icon={<RedditIcon size="md" />}
+          collapsed={collapsed}
+        />
       </div>
     </div>
-  )
-}
+  );
+};

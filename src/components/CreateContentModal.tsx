@@ -6,10 +6,12 @@ import { BACKEND_URL } from "../config";
 import axios from "axios";
 import { TwitterIcon } from "../icons/TwitterIcon";
 import { YoutubeIcon } from "../icons/YoutubeIcon";
+import { RedditIcon } from "../icons/RedditIcon";
 
 enum ContentType {
   Youtube = "youtube",
   Twitter = "twitter",
+  Reddit = "reddit",
 }
 
 export const CreateContentModal = ({
@@ -73,16 +75,17 @@ export const CreateContentModal = ({
           },
         }
       );
-      
+
       // Clear inputs
       if (titleRef.current) titleRef.current.value = "";
       if (linkRef.current) linkRef.current.value = "";
-      
+
       // Close modal and show success message
       onClose();
       // Use a more subtle notification instead of alert
       const notification = document.createElement("div");
-      notification.className = "fixed bottom-4 right-4 bg-green-500/90 text-white px-4 py-2 rounded-lg shadow-lg backdrop-blur-sm z-50 animate-fade-in-up";
+      notification.className =
+        "fixed bottom-4 right-4 bg-green-500/90 text-white px-4 py-2 rounded-lg shadow-lg backdrop-blur-sm z-50 animate-fade-in-up";
       notification.textContent = "Content added successfully!";
       document.body.appendChild(notification);
       setTimeout(() => {
@@ -102,33 +105,35 @@ export const CreateContentModal = ({
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"></div>
-      
+
       <div className="flex min-h-screen items-center justify-center p-4">
-        <div 
+        <div
           ref={modalRef}
           className="relative w-full max-w-md transform overflow-hidden rounded-2xl bg-black/40 backdrop-blur-xl border border-white/20 p-6 text-white shadow-2xl transition-all"
         >
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-semibold">Add New Bookmark</h2>
-            <button 
+            <button
               onClick={onClose}
               className="rounded-full p-1.5 text-white/70 hover:bg-yellow-300 hover:text-black transition-colors"
             >
               <CrossIcon size="md" />
             </button>
           </div>
-          
+
           {/* Content Type Selection */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-white/70 mb-2">Type</label>
+            <label className="block text-sm font-medium text-white/70 mb-2">
+              Type
+            </label>
             <div className="flex space-x-3">
               <button
                 type="button"
                 onClick={() => setType(ContentType.Youtube)}
                 className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg border ${
-                  type === ContentType.Youtube 
-                    ? "bg-yellow-500 border-yellow-400 text-black" 
+                  type === ContentType.Youtube
+                    ? "bg-yellow-500 border-yellow-400 text-black"
                     : "bg-white/5 border-white/10 hover:bg-white/10"
                 } transition-colors flex-1`}
               >
@@ -139,21 +144,38 @@ export const CreateContentModal = ({
                 type="button"
                 onClick={() => setType(ContentType.Twitter)}
                 className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg border ${
-                  type === ContentType.Twitter 
-                    ? "bg-yellow-500 border-yellow-400 text-black" 
+                  type === ContentType.Twitter
+                    ? "bg-yellow-500 border-yellow-400 text-black"
                     : "bg-white/5 border-white/10 hover:bg-white/10"
                 } transition-colors flex-1`}
               >
                 <TwitterIcon size="md" />
                 <span>Twitter</span>
               </button>
+              <button
+                type="button"
+                onClick={() => setType(ContentType.Reddit)}
+                className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg border ${
+                  type === ContentType.Reddit
+                    ? "bg-yellow-500 border-yellow-400 text-black"
+                    : "bg-white/5 border-white/10 hover:bg-white/10"
+                } transition-colors flex-1`}
+              >
+                <RedditIcon size="md" />
+                <span>Reddit</span>
+              </button>
             </div>
           </div>
-          
+
           {/* Form Fields */}
           <div className="space-y-4">
             <div>
-              <label htmlFor="title" className="block text-sm font-medium text-white/70 mb-1">Title</label>
+              <label
+                htmlFor="title"
+                className="block text-sm font-medium text-white/70 mb-1"
+              >
+                Title
+              </label>
               <Input
                 id="title"
                 type="text"
@@ -163,27 +185,42 @@ export const CreateContentModal = ({
                 className="bg-white/5 border-white/10 focus:border-yellow-500 text-white"
               />
             </div>
-            
+
             <div>
-              <label htmlFor="link" className="block text-sm font-medium text-white/70 mb-1">
-                {type === ContentType.Youtube ? "YouTube URL" : "Tweet URL"}
+              <label
+                htmlFor="link"
+                className="block text-sm font-medium text-white/70 mb-1"
+              >
+                {type === ContentType.Youtube
+                  ? "YouTube URL"
+                  : type === ContentType.Twitter
+                    ? "Tweet URL"
+                    : "Reddit URL"}
               </label>
               <Input
                 id="link"
                 type="text"
-                placeholder={type === ContentType.Youtube ? "https://youtube.com/watch?v=..." : "https://twitter.com/..."}
+                placeholder={
+                  type === ContentType.Youtube
+                    ? "https://youtube.com/watch?v=..."
+                    : type === ContentType.Twitter
+                      ? "https://twitter.com/..."
+                      : "https://reddit.com/..."
+                }
                 reference={linkRef}
                 fullWidth={true}
                 className="bg-white/5 border-white/10 focus:border-yellow-500 text-white"
               />
               <p className="mt-1 text-xs text-white/50">
-                {type === ContentType.Youtube 
-                  ? "Paste the full YouTube video URL" 
-                  : "Paste the full Twitter/X post URL"}
+                {type === ContentType.Youtube
+                  ? "Paste the full YouTube video URL"
+                  : type === ContentType.Twitter
+                    ? "Paste the full Twitter/X post URL"
+                    : "Paste the full Reddit post URL"}
               </p>
             </div>
           </div>
-          
+
           {/* Actions */}
           <div className="mt-6 flex justify-end space-x-3">
             <Button
