@@ -18,7 +18,7 @@ export const Hero = () => {
       </div>
       <div className="w-2/3 mt-10 h-1/2">
         <img
-          src="src/assets/images/Hero.png"
+          src="/public/Hero.png"
           alt="hero"
           className="rounded-3xl border border-yellow-500"
         />
