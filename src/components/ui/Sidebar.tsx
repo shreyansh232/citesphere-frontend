@@ -42,7 +42,7 @@ export const Sidebar = ({ onCollapsedChange }: SidebarProps) => {
         </div>
         <button
           onClick={toggleSidebar}
-          className={`p-2 rounded-full hover:bg-yellow-300 hover:text-black transition-colors mt-8 mr-3 ${collapsed ? "mr-10" : ""}`}
+          className={`p-1 rounded-full hover:bg-yellow-300 hover:text-black transition-colors mt-8 mr-3 ${collapsed ? "mr-10" : ""}`}
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}

@@ -51,6 +51,11 @@ export const Card = ({ title, link, type }: CardProps) => {
     }
   }, [type, link, title]);
 
+  const deleteBookmark = () => {
+    
+  }
+
+
   return (
     <div>
       <div className="backdrop-blur-md bg-white/10 rounded-xl border border-white/20 shadow-lg p-4 min-h-[350px] max-h-[350px] min-w-[350px] max-w-[350px] transition-all duration-300 hover:bg-white/20 hover:shadow-xl">
@@ -73,7 +78,7 @@ export const Card = ({ title, link, type }: CardProps) => {
             >
               <ShareIcon size="md" />
             </a>
-            <button className="hover:text-white/90 transition-colors">
+            <button className="hover:text-white/90 transition-colors" onClick={deleteBookmark}>
               <TrashIcon size="md" />
             </button>
           </div>

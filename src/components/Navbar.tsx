@@ -1,8 +1,23 @@
 import { Logo } from "../icons/Logo";
 import { Button } from "./ui/Button";
+import { useAuth } from "../hooks/useAuth";
 
 function Navbar() {
-  return (
+  const { isSignedIn } = useAuth();
+
+  return isSignedIn ? (
+    <div className="w-full fixed bg-transparent z-50 items-center p-5">
+      <div className="mx-20 flex justify-between">
+        <a href="/">
+          <div className="text-white text-2xl flex gap-1 items-center hover:text-gray-300">
+            {" "}
+            <Logo size="xl" />
+            Citesphere
+          </div>
+        </a>
+      </div>
+    </div>
+  ) : (
     <div className="w-full fixed bg-transparent z-50 items-center p-5">
       <div className="mx-20 flex justify-between">
         <a href="/">

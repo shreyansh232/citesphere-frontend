@@ -20,7 +20,7 @@ export const Hero = () => {
         <img
           src="src/assets/images/Hero.png"
           alt="hero"
-          className="rounded-3xl border-2 border-yellow-500"
+          className="rounded-3xl border border-yellow-500"
         />
       </div>
     </div>
