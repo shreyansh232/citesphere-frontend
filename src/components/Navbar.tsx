@@ -7,7 +7,7 @@ function Navbar() {
 
   return isSignedIn ? (
     <div className="w-full fixed bg-transparent z-50 items-center p-5">
-      <div className="mx-20 flex justify-between">
+      <div className="mx-5 md:mx-20 flex justify-between">
         <a href="/">
           <div className="text-white text-2xl flex gap-1 items-center hover:text-gray-300">
             {" "}
@@ -19,7 +19,7 @@ function Navbar() {
     </div>
   ) : (
     <div className="w-full fixed bg-transparent z-50 items-center p-5">
-      <div className="mx-20 flex justify-between">
+      <div className="mx-5 md:mx-20 flex justify-between">
         <a href="/">
           <div className="text-white text-2xl flex gap-1 items-center hover:text-gray-300">
             {" "}

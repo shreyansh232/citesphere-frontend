@@ -3,9 +3,9 @@ import { FaGithub, FaLink, FaXTwitter } from "react-icons/fa6";
 
 export const Footer = () => {
   return (
-    <div className="w-full h-[350px] bg-black p-10 border-t border-gray-800">
-      <div className="mx-24 flex justify-between mt-5">
-        <div className="max-w-sm">
+    <div className="w-full h-auto bg-black p-10 border-t border-gray-800">
+      <div className="mx-5 md:mx-24 flex flex-col md:flex-row justify-between mt-5">
+        <div className="max-w-sm mb-5 md:mb-0">
           <div>
             <a href="/">
               <div className="text-white text-2xl flex gap-1 items-center hover:text-gray-300">
